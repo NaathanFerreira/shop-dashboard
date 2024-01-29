@@ -12,12 +12,14 @@ interface PaginationProps {
   pageIndex: number
   totalCount: number
   perPage: number
+  onPageChange: (pageIndex: number) => Promise<void> | void
 }
 
 export function Pagination({
   pageIndex,
   totalCount,
   perPage,
+  onPageChange,
 }: PaginationProps) {
   const pages = Math.ceil(totalCount / perPage) || 1
 
@@ -35,13 +37,28 @@ export function Pagination({
             </div>
 
             <div className="flex items-center gap-2">
-              <PaginationLink>
+              <PaginationLink
+                onClick={() => onPageChange(0)}
+                disabled={pageIndex === 0}
+              >
                 <ChevronsLeft className="h-4 w-4" />
                 <span className="sr-only">First page</span>
               </PaginationLink>
-              <PaginationPrevious />
-              <PaginationNext />
-              <PaginationLink>
+
+              <PaginationPrevious
+                onClick={() => onPageChange(pageIndex - 1)}
+                disabled={pageIndex === 0}
+              />
+
+              <PaginationNext
+                onClick={() => onPageChange(pageIndex + 1)}
+                disabled={pages <= pageIndex + 1}
+              />
+
+              <PaginationLink
+                onClick={() => onPageChange(pages - 1)}
+                disabled={pages <= pageIndex + 1}
+              >
                 <ChevronsRight className="h-4 w-4" />
                 <span className="sr-only">Last page</span>
               </PaginationLink>
