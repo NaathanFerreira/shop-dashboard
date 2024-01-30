@@ -1,4 +1,4 @@
-type OrderStatusTypes =
+export type OrderStatusTypes =
   | 'pending'
   | 'canceled'
   | 'processing'
