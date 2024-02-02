@@ -1,6 +1,6 @@
 import { api } from '@/lib/axios'
 
-type GetPopularProductsResponse = Array<{
+export type GetPopularProductsResponse = Array<{
   product: string
   amount: number
 }>
