@@ -1,20 +1,37 @@
 import { expect, test } from '@playwright/test'
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/')
+test('sign in successfully', async ({ page }) => {
+  await page.goto('/sign-in', { waitUntil: 'networkidle' })
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/)
+  await page.getByLabel('E-mail').fill('johndoe@example.com')
+  await page.getByRole('button', { name: 'Access panel' }).click()
+
+  const toast = page.getByText('We send an authentication link to your email.')
+
+  expect(toast).toBeVisible()
+
+  await page.waitForTimeout(2000)
 })
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/')
+test('sign in with wrong credentials', async ({ page }) => {
+  await page.goto('/sign-in', { waitUntil: 'networkidle' })
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click()
+  await page.getByLabel('E-mail').fill('wrongemail@example.com')
+  await page.getByRole('button', { name: 'Access panel' }).click()
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(
-    page.getByRole('heading', { name: 'Installation' }),
-  ).toBeVisible()
+  const toast = page.getByText('Wrong credentials.')
+
+  expect(toast).toBeVisible()
+
+  await page.waitForTimeout(2000)
+})
+
+test('navigate to new restaurant page', async ({ page }) => {
+  await page.goto('/sign-in', { waitUntil: 'networkidle' })
+
+  await page.getByRole('link', { name: 'New restaurant' }).click()
+
+  expect(page.url()).toContain('/sign-up')
+
+  await page.waitForTimeout(2000)
 })
