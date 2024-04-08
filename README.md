@@ -32,15 +32,17 @@ ShopDashboard is a comprehensive application designed specifically for restauran
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/NaathanFerreira/igshop.git
+$ git clone https://github.com/NaathanFerreira/shop-dashboard
 # Access the project folder on terminal/cmd
-$ cd igshop
+$ cd shop-dashboard
 # Install dependencies
 $ yarn
 # or
 $ npm install
-# Start the application
-$ yarn start
+# Start the application with API Mocks
+$ yarn dev:test
 # or
-$ npm start
+$ npm run dev:test
+# Start the application with local API
+$ Run shop-dashboard-api: https://github.com/NaathanFerreira/shop-dashboard-api
 ```
