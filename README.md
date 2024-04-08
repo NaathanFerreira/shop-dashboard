@@ -3,7 +3,7 @@
 ## Demo 📸
 
 <div align="center" >
-  <img src="./github/demo1.gif" alt="demo1" height="425">
+  <img src="./github/demo.gif" alt="demo1" height="425">
 </div>
 
 ---
